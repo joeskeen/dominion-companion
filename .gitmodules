@@ -1,0 +1,3 @@
+[submodule "dominiontabs"]
+	path = dominiontabs
+	url = git@github.com:sumpfork/dominiontabs.git
