@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "submodule": "git submodule init && git submodule update",
-    "refresh": "npm run submodule && npx ts-node copy-dominion-assets"
+    "refresh": "npm run submodule && npx ts-node copy-dominion-assets",
+    "postinstall": "npm run refresh"
   },
   "private": true,
   "dependencies": {
