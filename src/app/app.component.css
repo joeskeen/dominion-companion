@@ -1,0 +1,11 @@
+li {
+  color: #c0c0c0;
+}
+
+li.supply {
+  color: black;
+}
+
+.set-icon {
+  width: 20px;
+}
