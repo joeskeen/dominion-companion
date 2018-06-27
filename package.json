@@ -23,7 +23,11 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "@healthcatalyst/cashmere": "0.0.10",
     "core-js": "^2.5.4",
+    "font-awesome": "^4.7.0",
+    "npm-font-open-sans": "^1.1.0",
+    "popper.js": "^1.14.3",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },
