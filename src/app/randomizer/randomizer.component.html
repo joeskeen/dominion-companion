@@ -8,11 +8,19 @@
 </ul>
 <hr />
 <button hc-button (click)="randomize()">Re-Randomize!</button>
-<!-- <h3>Selected Expansions</h3> -->
-<!-- <div>
-    <hc-checkbox *ngFor="let expansion of expansionList" 
-                 [id]="expansion.key + '_checkbox'" 
-                 >
+<h3>Selected Expansions</h3>
+<button hc-button (click)="selectAllExpansions()">Select All</button>
+<button hc-button (click)="selectNoneExpansions()">Clear Selection</button>
+<div *ngFor="let expansion of expansionList">
+    <!-- <input type="checkbox" 
+        [(ngModel)]="expansion.selected" 
+        [id]="expansion.key + '_checkbox'"
+         />
+    <label [for]="expansion.key + '_checkbox'">{{expansion.set_name}}</label> -->
+    <hc-checkbox  
+        [id]="expansion.key + '_checkbox'" 
+        [name]="expansion.key + '_checkbox'"
+        [(ngModel)]="expansion.selected">
         {{expansion.set_name}}
     </hc-checkbox>
-</div> -->
+</div>

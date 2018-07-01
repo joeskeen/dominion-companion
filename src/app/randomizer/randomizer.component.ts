@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DominionDataService } from '../services/dominion-data.service';
 import { RandomizerService } from './randomizer.service';
 import { Card } from '../models/card';
-import { ExpansionMap } from '../models/expansion';
+import { ExpansionMap, Expansion } from '../models/expansion';
 
 @Component({
     selector: 'app-randomizer',
@@ -12,12 +12,12 @@ import { ExpansionMap } from '../models/expansion';
 export class RandomizerComponent implements OnInit {
     cards: Card[];
     expansions: ExpansionMap;
-    get expansionList() {
-        return Object.keys(this.expansions)
-            .map(k => Object.assign({ key: k }, this.expansions[k]));
+    expansionList: Array<Expansion & { key: string; selected?: boolean; }>;
+    get selectedExpansions() {
+        return this.expansionList
+            .filter(e => e.selected)
+            .map(e => e.key);
     }
-    get selectedExpansions() { return Object.keys(this.expansions); }
-    readonly expansionSelections: { [expansionKey: string]: boolean; } = {};
 
     constructor(private dominionDataService: DominionDataService,
                 private randomizerService: RandomizerService) {
@@ -27,8 +27,8 @@ export class RandomizerComponent implements OnInit {
     ngOnInit() {
         this.dominionDataService.getExpansions()
             .subscribe(expansions => {
-                Object.keys(expansions)
-                    .forEach(expansionKey => this.expansionSelections[expansionKey] = true);
+                this.expansionList = Object.keys(expansions)
+                    .map(k => Object.assign({ key: k }, { selected: true }, expansions[k]));
                 this.expansions = expansions;
                 this.randomize();
             });
@@ -37,5 +37,13 @@ export class RandomizerComponent implements OnInit {
     randomize() {
         this.randomizerService.getRandomCards(this.selectedExpansions)
             .subscribe(cards => this.cards = cards);
+    }
+
+    selectAllExpansions() {
+        this.expansionList.forEach(e => e.selected = true);
+    }
+
+    selectNoneExpansions() {
+        this.expansionList.forEach(e => e.selected = false);
     }
 }
