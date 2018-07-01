@@ -2,15 +2,7 @@
   <hc-navbar-link [active]="true" uri="undefined" linkText="Randomizer"></hc-navbar-link>
   <hc-navbar-link [active]="false" uri="undefined" linkText="Reference"></hc-navbar-link>
 </hc-navbar>
-<div *ngIf="loading">
-  <h1>LOADING...</h1>
-</div>
-<div *ngIf="!loading">
-  <ul>
-    <li *ngFor="let card of cards" [class.supply]="card.randomizer !== false" [title]="card.description">
-      {{card.card_tag}} ({{card.cost}}) [
-      <span *ngFor="let type of card.types"> {{type}} </span>]
-      <img class="set-icon" [src]="setFor(card).image" [title]="card.cardset_tags[0]" />
-    </li>
-  </ul>
+<div class="content">
+  <h1 *ngIf="loading">LOADING...</h1>
+  <router-outlet *ngIf="!loading"></router-outlet>
 </div>

@@ -26,6 +26,7 @@
     "@healthcatalyst/cashmere": "0.0.10",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
+    "ngx-cookie": "^4.0.2",
     "npm-font-open-sans": "^1.1.0",
     "popper.js": "^1.14.3",
     "rxjs": "^6.0.0",

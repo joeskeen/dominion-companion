@@ -1,0 +1,18 @@
+<h3>Cards</h3>
+<ul>
+    <li *ngFor="let card of cards">
+        <img class="set-icon" [src]="(expansions[card.cardset_tags[0]] || {}).image" /> 
+        &nbsp; 
+        <strong>{{card.name}}</strong> ({{card.cost}}) [{{card.types.join(', ')}}] <em>{{card.description}}</em>
+    </li>
+</ul>
+<hr />
+<button hc-button (click)="randomize()">Re-Randomize!</button>
+<!-- <h3>Selected Expansions</h3> -->
+<!-- <div>
+    <hc-checkbox *ngFor="let expansion of expansionList" 
+                 [id]="expansion.key + '_checkbox'" 
+                 >
+        {{expansion.set_name}}
+    </hc-checkbox>
+</div> -->
