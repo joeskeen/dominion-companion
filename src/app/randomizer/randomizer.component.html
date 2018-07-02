@@ -3,7 +3,10 @@
     <li *ngFor="let card of cards">
         <img class="set-icon" [src]="(expansions[card.cardset_tags[0]] || {}).image" /> 
         &nbsp; 
-        <strong>{{card.name}}</strong> ({{card.cost}}) [{{card.types.join(', ')}}] <em>{{card.description}}</em>
+        <strong>{{card.name}}</strong> 
+({{card.cost}}<img *ngIf="card.potcost" 
+class="potcost" src="assets/images/potion.png">) 
+[{{card.types.join(', ')}}] <em>{{card.description}}</em>
     </li>
 </ul>
 <hr />
