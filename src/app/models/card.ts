@@ -6,6 +6,7 @@ export interface Card {
     randomizer?: boolean;
     types: string[];
     count?: string;
+    potcost?: string;
 }
 
 export type CompleteCard = Card & CardText;
