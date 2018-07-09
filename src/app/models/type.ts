@@ -6,6 +6,10 @@ export interface Type {
     tabTextHeightOffset: number;
 }
 
+export interface LocaleType extends Type {
+    localeType: string[];
+}
+
 export interface LocaleTypeTextMap {
     [typeKey: string]: string;
 }

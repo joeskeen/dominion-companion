@@ -1,0 +1,11 @@
+<img class="card_type_image" [src]="type.card_type_image" />
+<img class="set-icon" *ngIf="expansion && expansion.image" [src]="expansion.image" [title]="expansion.set_name" />
+<span class="name" [style.fontSize]="card.name.length > 12 ? 'smaller' : 'larger'">{{ card.name }}</span>
+<span class="types">{{ type.localeType.join(' - ') }}</span>
+<span class="cost">{{card.cost || 0}}</span>
+<img *ngIf="card.potcost" class="potcost" src="assets/images/potion.png">
+<!-- <img class="set-icon" [src]="(expansions[card.cardset_tags[0]] || {}).image" /> 
+        &nbsp; 
+        <strong>{{card.name}}</strong> 
+({{card.cost}}) 
+[{{card.types.join(', ')}}] <em>{{card.description}}</em> -->

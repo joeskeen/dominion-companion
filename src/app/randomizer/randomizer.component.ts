@@ -3,6 +3,8 @@ import { DominionDataService } from '../services/dominion-data.service';
 import { RandomizerService } from './randomizer.service';
 import { Card } from '../models/card';
 import { ExpansionMap, Expansion } from '../models/expansion';
+import { Type, LocaleType } from '../models/type';
+import { forkJoin } from 'rxjs';
 
 @Component({
     selector: 'app-randomizer',
@@ -11,6 +13,7 @@ import { ExpansionMap, Expansion } from '../models/expansion';
 })
 export class RandomizerComponent implements OnInit {
     cards: Card[];
+    cardTypes: LocaleType[];
     expansions: ExpansionMap;
     expansionList: Array<Expansion & { key: string; selected?: boolean; }>;
     get selectedExpansions() {
@@ -24,14 +27,30 @@ export class RandomizerComponent implements OnInit {
         (window as any).component = this;
     }
 
+    getExpansion(card: Card): Expansion {
+        const setTag = card.cardset_tags
+            .filter(s => this.selectedExpansions.includes(s))
+            [0];
+        return this.expansions[setTag];
+    }
+
+    getType(card: Card): Type {
+        const types = card.types.join(', ');
+        return this.cardTypes.filter(ct => ct.card_type.join(', ') === types)[0];
+    }
+
     ngOnInit() {
-        this.dominionDataService.getExpansions()
-            .subscribe(expansions => {
-                this.expansionList = Object.keys(expansions)
-                    .map(k => Object.assign({ key: k }, { selected: true }, expansions[k]));
-                this.expansions = expansions;
-                this.randomize();
-            });
+        forkJoin(
+            this.dominionDataService.getExpansions(),
+            this.dominionDataService.getCardTypes()
+        )
+        .subscribe(([expansions, cardTypes]) => {
+            this.cardTypes = cardTypes;
+            this.expansionList = Object.keys(expansions)
+                .map(k => Object.assign({ key: k }, { selected: true }, expansions[k]));
+            this.expansions = expansions;
+            this.randomize();
+        });
     }
 
     randomize() {

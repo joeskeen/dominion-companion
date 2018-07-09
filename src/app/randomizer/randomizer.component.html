@@ -1,12 +1,7 @@
 <h3>Cards</h3>
 <ul>
     <li *ngFor="let card of cards">
-        <img class="set-icon" [src]="(expansions[card.cardset_tags[0]] || {}).image" /> 
-        &nbsp; 
-        <strong>{{card.name}}</strong> 
-({{card.cost}}<img *ngIf="card.potcost" 
-class="potcost" src="assets/images/potion.png">) 
-[{{card.types.join(', ')}}] <em>{{card.description}}</em>
+        <app-card-summary [card]="card" [expansion]="getExpansion(card)" [type]="getType(card)"></app-card-summary>
     </li>
 </ul>
 <hr />

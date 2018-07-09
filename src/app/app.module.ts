@@ -11,11 +11,13 @@ import { DominionDataService } from './services/dominion-data.service';
 import { RandomizerService } from './randomizer/randomizer.service';
 import { RandomizerComponent } from './randomizer/randomizer.component';
 import { FormsModule } from '@angular/forms';
+import { CardSummaryComponent } from './card-summary/card-summary.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RandomizerComponent
+    RandomizerComponent,
+    CardSummaryComponent
   ],
   imports: [
     BrowserModule,

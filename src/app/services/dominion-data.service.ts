@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { LocaleService } from './locale.service';
 import { Card, LocaleCardTextMap, CardText } from '../models/card';
 import { ExpansionMap, LocaleExpansionTextMap, CompleteExpansion } from '../models/expansion';
-import { Type, LocaleTypeTextMap } from '../models/type';
+import { Type, LocaleTypeTextMap, LocaleType } from '../models/type';
 import { Expansion } from '../models/expansion';
 
 @Injectable()
@@ -68,6 +68,14 @@ export class DominionDataService {
         );
   }
 
+  public getCardTypes(): Observable<LocaleType[]> {
+      return forkJoin(this.types, this.getTypeTexts()).pipe(
+          map(([types, typeTexts]) => types.map(t => Object.assign(
+            { localeType: t.card_type.map(ct => typeTexts[ct]) },
+            t) as LocaleType))
+      );
+  }
+
   private get cards(): Observable<Card[]> {
     if (this._cards) {
         return of(this._cards);
@@ -118,11 +126,11 @@ export class DominionDataService {
         return of(this._types);
     }
     const types$ = this.httpClient.get<Type[]>(this.getDataUrl('types'));
-    types$.subscribe(t => {
-        Object.keys(t)
-            .filter(typeKey => !!t[typeKey].image)
-            .forEach(typeKey => t[typeKey].image = this.imageRoot + t[typeKey].image);
-        this._types = t;
+    types$.subscribe(types => {
+        types
+            .filter(type => !!type.card_type_image)
+            .forEach(type => type.card_type_image = this.imageRoot + type.card_type_image);
+        this._types = types;
     });
     return types$;
   }
