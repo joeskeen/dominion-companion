@@ -1,9 +1,12 @@
 <h3>Cards</h3>
-<ul>
-    <li *ngFor="let card of cards">
-        <app-card-summary [card]="card" [expansion]="getExpansion(card)" [type]="getType(card)"></app-card-summary>
-    </li>
-</ul>
+<div>
+    <app-card-summary *ngFor="let card of cards"
+        [card]="card" 
+        [expansion]="getExpansion(card)" 
+        [type]="getType(card)">
+    </app-card-summary>
+</div>
+<div class="clear"></div>
 <hr />
 <button hc-button (click)="randomize()">Re-Randomize!</button>
 <h3>Selected Expansions</h3>

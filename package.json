@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "submodule": "git submodule init && git submodule update",
+    "submodule": "git submodule init && git submodule update && git submodule foreach git pull origin master",
     "refresh": "npm run submodule && npx ts-node copy-dominion-assets",
     "postinstall": "npm run refresh"
   },

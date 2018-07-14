@@ -30,14 +30,15 @@ $width: 215px;
 
 .name {
     @include overlaid;
-    left: 65px;
-    top: 25px;
+    left: 45px;
+    top: 22px;
     font-size: larger;
+    font-weight: 600;
 }
 
 .cost {
     @include overlaid;
-    left: 10px;
+    left: 5px;
     top: 30px;
     font-weight: bold;
     font-size: larger;
@@ -46,18 +47,26 @@ $width: 215px;
     text-align: center;
 }
 
+.coin {
+    @include overlaid;
+    width: 20px;
+    left: 7.5px;
+    top: 28px;
+}
+
 .potcost {
     @include overlaid;
-    top: 28px;
-    left: 45px;
-    width: 15px;
+    top: 30px;
+    left: 28px;
+    width: 10px;
 }
 
 .types {
     @include overlaid;
-    left: 65px;
-    top: 40px;
+    left: 45px;
+    top: 37px;
     font-size: smaller;
+    font-weight: 600;
 }
 
 .set-icon {
