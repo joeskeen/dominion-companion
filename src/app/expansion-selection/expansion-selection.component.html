@@ -1,0 +1,15 @@
+<hc-modal>
+    <hc-modal-header>Selected Expansions</hc-modal-header>
+    <hc-modal-body>
+        <button hc-button color="secondary" (click)="selectAllExpansions()">Select All</button>
+        <button hc-button color="secondary" (click)="selectNoneExpansions()">Clear Selection</button>
+        <div *ngFor="let expansion of expansionList">
+            <hc-checkbox [id]="expansion.key + '_checkbox'" [name]="expansion.key + '_checkbox'" [(ngModel)]="expansion.selected">
+                {{expansion.set_name}}
+            </hc-checkbox>
+        </div>
+    </hc-modal-body>
+    <hc-modal-footer>
+        <button hc-button (click)="save()">Save</button>
+    </hc-modal-footer>
+</hc-modal>

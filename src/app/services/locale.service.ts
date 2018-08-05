@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { PreferencesService } from './preferences.service';
 
 @Injectable()
 export class LocaleService {
@@ -9,19 +11,24 @@ export class LocaleService {
     ];
     private _currentLocale: string = null;
 
-    constructor(private cookieService: CookieService) { }
+    constructor(private preferencesService: PreferencesService) { }
 
-    get currentLocale() {
-        return this._currentLocale
-            || this.cookieService.get('locale')
-            || this.defaultLocale;
+    getCurrentLocale(): Observable<string> {
+        if (this._currentLocale) {
+            return of(this._currentLocale);
+        }
+
+        return this.preferencesService.getPreference<string>('locale')
+            .pipe(
+                map(l => l || this.defaultLocale)
+            );
     }
-    set currentLocale(locale: string) {
+    setLocale(locale: string) {
         if (!this.supportedLocales.includes(locale)) {
             locale = this.defaultLocale;
         }
 
         this._currentLocale = locale;
-        this.cookieService.put('locale', locale);
+        this.preferencesService.setPreference('locale', locale);
     }
 }

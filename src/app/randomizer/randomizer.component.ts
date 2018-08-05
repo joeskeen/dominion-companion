@@ -5,6 +5,9 @@ import { Card } from '../models/card';
 import { ExpansionMap, Expansion } from '../models/expansion';
 import { Type, LocaleType } from '../models/type';
 import { forkJoin } from 'rxjs';
+import { SelectedExpansionsService } from '../services/selected-expansions.service';
+import { ModalService } from '@healthcatalyst/cashmere';
+import { ExpansionSelectionComponent } from '../expansion-selection/expansion-selection.component';
 
 @Component({
     selector: 'app-randomizer',
@@ -15,7 +18,7 @@ export class RandomizerComponent implements OnInit {
     cards: Card[];
     cardTypes: LocaleType[];
     expansions: ExpansionMap;
-    expansionList: Array<Expansion & { key: string; selected?: boolean; }>;
+    expansionList: Array<Expansion & { key: string; selected?: boolean; }> = [];
     get selectedExpansions() {
         return this.expansionList
             .filter(e => e.selected)
@@ -23,7 +26,9 @@ export class RandomizerComponent implements OnInit {
     }
 
     constructor(private dominionDataService: DominionDataService,
-                private randomizerService: RandomizerService) {
+                private randomizerService: RandomizerService,
+                private selectedExpansionsService: SelectedExpansionsService,
+                private modalService: ModalService) {
         (window as any).component = this;
     }
 
@@ -42,13 +47,23 @@ export class RandomizerComponent implements OnInit {
     ngOnInit() {
         forkJoin(
             this.dominionDataService.getExpansions(),
-            this.dominionDataService.getCardTypes()
+            this.dominionDataService.getCardTypes(),
+            this.selectedExpansionsService.getSelectedExpansions()
         )
-        .subscribe(([expansions, cardTypes]) => {
+        .subscribe(([expansions, cardTypes, selectedExpansions]) => {
             this.cardTypes = cardTypes;
             this.expansionList = Object.keys(expansions)
-                .map(k => Object.assign({ key: k }, { selected: true }, expansions[k]));
+                .map(k => Object.assign(
+                    { key: k },
+                    { selected: selectedExpansions.includes(k) },
+                    expansions[k]));
             this.expansions = expansions;
+            this.selectedExpansionsService.selectedExpansionsChanged
+                .subscribe(newSelectedExpansions => {
+                    this.expansionList.forEach(expansion =>
+                        expansion.selected = newSelectedExpansions.includes(expansion.key));
+                    this.randomize();
+                });
             this.randomize();
         });
     }
@@ -58,11 +73,7 @@ export class RandomizerComponent implements OnInit {
             .subscribe(cards => this.cards = cards);
     }
 
-    selectAllExpansions() {
-        this.expansionList.forEach(e => e.selected = true);
-    }
-
-    selectNoneExpansions() {
-        this.expansionList.forEach(e => e.selected = false);
+    selectExpansions() {
+        this.modalService.open(ExpansionSelectionComponent);
     }
 }
