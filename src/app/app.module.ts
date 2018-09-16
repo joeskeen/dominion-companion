@@ -17,13 +17,15 @@ import { PreferencesService } from './services/preferences.service';
 import { ModalModule } from '@healthcatalyst/cashmere';
 import { ExpansionSelectionComponent } from './expansion-selection/expansion-selection.component';
 import { SelectedExpansionsService } from './services/selected-expansions.service';
+import { DescriptionPipe } from './pipes/description.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     RandomizerComponent,
     CardSummaryComponent,
-    ExpansionSelectionComponent
+    ExpansionSelectionComponent,
+    DescriptionPipe
   ],
   imports: [
     BrowserModule,
