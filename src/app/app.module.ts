@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -6,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 
 import { AppComponent } from './app.component';
-import { NavbarModule, ButtonModule, CheckboxModule } from '@healthcatalyst/cashmere';
+import { NavbarModule, ButtonModule, CheckboxModule, ListModule, IconModule } from '@healthcatalyst/cashmere';
 import { LocaleService } from './services/locale.service';
 import { DominionDataService } from './services/dominion-data.service';
 import { RandomizerService } from './randomizer/randomizer.service';
@@ -33,6 +34,8 @@ import { DescriptionPipe } from './pipes/description.pipe';
     FormsModule,
     HttpClientModule,
     NavbarModule,
+    ListModule,
+    IconModule,
     ButtonModule,
     CheckboxModule,
     ModalModule,
