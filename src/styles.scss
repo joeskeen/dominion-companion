@@ -10,3 +10,28 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/**
+ * CASHMERE OVERRIDES
+ */
+ hc-app-switcher hc-popover-content {
+  // make the app switcher icon size consistent
+  .popover-icon.img-responsive {
+    width: 125px !important;
+    height: 125px !important;
+  }
+
+  // Replace the title of the popop (not "Applications")
+  h4 {
+    color: white;
+    &:before {
+      color: black;
+      content: 'Notable Dominion Websites';
+    }
+  }
+
+  // suppress the "All my applications" link from Cashmere
+  .all-apps-link {
+    display: none !important;
+  }
+}

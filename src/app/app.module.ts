@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 
 import { AppComponent } from './app.component';
-import { NavbarModule, ButtonModule, CheckboxModule, ListModule, IconModule } from '@healthcatalyst/cashmere';
+import { NavbarModule, ButtonModule, CheckboxModule, ListModule, IconModule, AppSwitcherModule } from '@healthcatalyst/cashmere';
 import { LocaleService } from './services/locale.service';
 import { DominionDataService } from './services/dominion-data.service';
 import { RandomizerService } from './randomizer/randomizer.service';
@@ -19,6 +19,7 @@ import { ModalModule } from '@healthcatalyst/cashmere';
 import { ExpansionSelectionComponent } from './expansion-selection/expansion-selection.component';
 import { SelectedExpansionsService } from './services/selected-expansions.service';
 import { DescriptionPipe } from './pipes/description.pipe';
+import { DominionAppSwitcherService } from './services/app-switcher.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { DescriptionPipe } from './pipes/description.pipe';
     NavbarModule,
     ListModule,
     IconModule,
+    AppSwitcherModule,
     ButtonModule,
     CheckboxModule,
     ModalModule,
@@ -50,9 +52,11 @@ import { DescriptionPipe } from './pipes/description.pipe';
     RandomizerService,
     LocalStorage,
     PreferencesService,
-    SelectedExpansionsService
+    SelectedExpansionsService,
+    { provide: 'IAppSwitcherService', useClass: DominionAppSwitcherService },
+    { provide: 'IAppSwitcherConfig', useValue: { discoveryServiceUri: 'assets/data/apps' } }
   ],
-  entryComponents: [ ExpansionSelectionComponent ],
+  entryComponents: [ExpansionSelectionComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

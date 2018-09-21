@@ -1,4 +1,6 @@
 <hc-navbar brandIcon="assets/images/victory_emblem.png" appIcon="assets/images/expansion_nc.png" homeUri="/randomizer" fixedTop="true">
+  <hc-app-switcher brandIcon="assets/images/victory_emblem.png"></hc-app-switcher>
+
   <hc-navbar-link uri="/randomizer" linkText="Randomizer"></hc-navbar-link>
   <!-- <hc-navbar-link uri="/reference" linkText="Reference"></hc-navbar-link> -->
   <hc-navbar-icon>
@@ -7,7 +9,7 @@
     </a>
   </hc-navbar-icon>
 
-  <hc-navbar-mobile-menu appSwitcher="false">
+  <hc-navbar-mobile-menu appSwitcher="true">
     <hc-list>
         <hc-list-item routerLink="/randomizer" routerLinkActive="active-link">
             <span hcListLine>Randomizer</span>
