@@ -31,6 +31,7 @@ export class ExpansionSelectionComponent implements OnInit {
         .subscribe(([expansions, selectedExpansions]) => {
             selectedExpansions = selectedExpansions || Object.keys(expansions);
             this.expansionList = Object.keys(expansions)
+                .filter(k => !expansions[k].no_randomizer)
                 .map(k => Object.assign(
                     { key: k },
                     { selected: selectedExpansions.includes(k) },

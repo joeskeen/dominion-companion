@@ -1,11 +1,8 @@
-li {
-  color: #c0c0c0;
-}
-
-li.supply {
-  color: black;
-}
+@import "~@healthcatalyst/cashmere/scss/colors";
 
 .content {
+  background-color: $slate-gray-100;
+
+  margin-top: 53px;
   padding: 10px;
 }

@@ -17,6 +17,18 @@ export class DominionAppSwitcherService {
           FriendlyName: 'BoardGameGeek',
           Icon: 'https://pbs.twimg.com/profile_images/1254446238/Geek_Head_400x400.jpg',
           ServiceUrl: 'https://boardgamegeek.com/boardgame/36218/dominion'
+        },
+        {
+          Description: 'Dominion Strategy Wiki',
+          FriendlyName: 'Strategy Wiki',
+          Icon: 'http://wiki.dominionstrategy.com/skins/common/images/dslogo.png',
+          ServiceUrl: 'http://wiki.dominionstrategy.com'
+        },
+        {
+          Description: 'Divider generator for the card game Dominion and its expansions.',
+          FriendlyName: 'Tab Generator',
+          Icon: 'https://avatars1.githubusercontent.com/u/9730025?s=400&v=4g',
+          ServiceUrl: 'http://domtabs.sandflea.org/'
         }
       ] as IDiscoveryApplication[] });
     }

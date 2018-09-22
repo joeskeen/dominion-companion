@@ -1,14 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'description',
-  pure: true
+    name: 'description',
+    pure: true
 })
 export class DescriptionPipe implements PipeTransform {
-    transform(description: string){
+    transform(description: string) {
+        console.log(description);
         return description
-            .replace('<line>','<hr/>')
-            .replace('<n>', '<br/>')
-            .replace('<br>','<br/>');
+            .split(/<n>|<br>/g)
+            .map(p => `<p>${p}</p>`)
+            .join('')
+            .replace('<line>', '<hr/>');
     }
 }

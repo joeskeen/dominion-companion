@@ -7,7 +7,15 @@ import { RouterModule } from '@angular/router';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 
 import { AppComponent } from './app.component';
-import { NavbarModule, ButtonModule, CheckboxModule, ListModule, IconModule, AppSwitcherModule } from '@healthcatalyst/cashmere';
+import {
+  NavbarModule,
+  ButtonModule,
+  CheckboxModule,
+  ListModule,
+  IconModule,
+  AppSwitcherModule,
+  TileModule
+} from '@healthcatalyst/cashmere';
 import { LocaleService } from './services/locale.service';
 import { DominionDataService } from './services/dominion-data.service';
 import { RandomizerService } from './randomizer/randomizer.service';
@@ -41,6 +49,7 @@ import { DominionAppSwitcherService } from './services/app-switcher.service';
     ButtonModule,
     CheckboxModule,
     ModalModule,
+    TileModule,
     RouterModule.forRoot([
       { path: 'randomizer', component: RandomizerComponent },
       { path: '', pathMatch: 'full', redirectTo: 'randomizer' }

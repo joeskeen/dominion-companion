@@ -4,11 +4,11 @@ $width: 215px;
 :host {
     display: block;
     position: relative;
-    
+
     height: $height;
     min-height: $height;
     max-height: $height;
-    
+
     width: $width;
     min-width: $width;
     max-width: $width;
@@ -75,4 +75,8 @@ $width: 215px;
     top: 25px;
     width: 20px;
     height: 20px;
+}
+
+span p {
+    line-height: 1.0;
 }

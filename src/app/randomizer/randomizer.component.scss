@@ -2,6 +2,12 @@
     width: 20px;
 }
 
+.includingExpansions {
+    display: block;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
 app-card-summary {
     display: inline-block;
     margin: 5px;
@@ -9,4 +15,23 @@ app-card-summary {
 
 .card {
     text-align: center;
+}
+
+hc-tile.card {
+    padding: 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+    width: 300px;
+    min-height: 200px;
+    margin: 10px;
+    vertical-align: top;
+}
+
+.header {
+    display: flex;
+    flex-flow: row;
+
+    .left {
+        flex: 1;
+    }
 }
