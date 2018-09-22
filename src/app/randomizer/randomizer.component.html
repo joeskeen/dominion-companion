@@ -12,9 +12,11 @@
         </button>
     </div>
 </div>
+<div class="cards">
 <hc-tile class="card" *ngFor="let card of cards">
     <app-card-summary [card]="card" [expansion]="getExpansion(card)" [type]="getType(card)">
     </app-card-summary>
     <br/>
     <span [innerHTML]="card.description | description"></span>
 </hc-tile>
+</div>
