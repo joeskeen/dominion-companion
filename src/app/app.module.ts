@@ -14,7 +14,12 @@ import {
   ListModule,
   IconModule,
   AppSwitcherModule,
-  TileModule
+  TileModule,
+  TabsModule,
+  AccordionModule,
+  RadioButtonModule,
+  LabelModule,
+  InputModule
 } from '@healthcatalyst/cashmere';
 import { LocaleService } from './services/locale.service';
 import { DominionDataService } from './services/dominion-data.service';
@@ -24,7 +29,7 @@ import { FormsModule } from '@angular/forms';
 import { CardSummaryComponent } from './card-summary/card-summary.component';
 import { PreferencesService } from './services/preferences.service';
 import { ModalModule } from '@healthcatalyst/cashmere';
-import { ExpansionSelectionComponent } from './expansion-selection/expansion-selection.component';
+import { RandomizerSettingsComponent } from './randomizer-settings/randomizer-settings.component';
 import { SelectedExpansionsService } from './services/selected-expansions.service';
 import { DescriptionPipe } from './pipes/description.pipe';
 import { DominionAppSwitcherService } from './services/app-switcher.service';
@@ -34,7 +39,7 @@ import { DominionAppSwitcherService } from './services/app-switcher.service';
     AppComponent,
     RandomizerComponent,
     CardSummaryComponent,
-    ExpansionSelectionComponent,
+    RandomizerSettingsComponent,
     DescriptionPipe
   ],
   imports: [
@@ -50,6 +55,10 @@ import { DominionAppSwitcherService } from './services/app-switcher.service';
     CheckboxModule,
     ModalModule,
     TileModule,
+    TabsModule,
+    AccordionModule,
+    RadioButtonModule,
+    InputModule,
     RouterModule.forRoot([
       { path: 'randomizer', component: RandomizerComponent },
       { path: '', pathMatch: 'full', redirectTo: 'randomizer' }
@@ -65,7 +74,7 @@ import { DominionAppSwitcherService } from './services/app-switcher.service';
     { provide: 'IAppSwitcherService', useClass: DominionAppSwitcherService },
     { provide: 'IAppSwitcherConfig', useValue: { discoveryServiceUri: 'assets/data/apps' } }
   ],
-  entryComponents: [ExpansionSelectionComponent],
+  entryComponents: [RandomizerSettingsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

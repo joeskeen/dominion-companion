@@ -1,0 +1,37 @@
+<hc-modal>
+    <hc-modal-header>Randomizer Settings</hc-modal-header>
+    <hc-modal-body>
+        <hc-tab-set direction="horizontal">
+            <hc-tab tabTitle="Expansions">
+                <div class="tab-content">
+                    <div class="right">
+                        <button hc-button color="secondary" (click)="selectAllExpansions()">Select All</button>
+                        &nbsp;
+                        <button hc-button color="secondary" (click)="selectNoneExpansions()">Clear Selection</button>
+                    </div>
+                    <div *ngFor="let expansion of expansionList">
+                        <hc-checkbox [id]="expansion.key + '_checkbox'" [name]="expansion.key + '_checkbox'"
+                            [(ngModel)]="expansion.selected">
+                            <img [src]="expansion.image" class="icon" /> {{expansion.set_name}}
+                        </hc-checkbox>
+                    </div>
+                </div>
+            </hc-tab>
+            <hc-tab tabTitle="Advanced">
+                <div class="tab-content">
+                    <div *ngFor="let type of cardTypes" class="option">
+                        <label>{{ type.key }}</label>
+                        <hc-radio-group class="choices">
+                            <hc-radio-button class="always" value="true">Always</hc-radio-button>
+                            <hc-radio-button class="never" value="false">Never</hc-radio-button>
+                            <hc-radio-button value="null" [checked]="true">Random</hc-radio-button>
+                        </hc-radio-group>
+                    </div>
+                </div>
+            </hc-tab>
+        </hc-tab-set>
+    </hc-modal-body>
+    <hc-modal-footer>
+        <button hc-button (click)="save()">Save</button>
+    </hc-modal-footer>
+</hc-modal>

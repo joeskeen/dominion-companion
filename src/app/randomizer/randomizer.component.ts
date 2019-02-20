@@ -7,7 +7,7 @@ import { Type, LocaleType } from '../models/type';
 import { forkJoin } from 'rxjs';
 import { SelectedExpansionsService } from '../services/selected-expansions.service';
 import { ModalService } from '@healthcatalyst/cashmere';
-import { ExpansionSelectionComponent } from '../expansion-selection/expansion-selection.component';
+import { RandomizerSettingsComponent } from '../randomizer-settings/randomizer-settings.component';
 
 @Component({
     selector: 'app-randomizer',
@@ -73,7 +73,7 @@ export class RandomizerComponent implements OnInit {
             .subscribe(cards => this.cards = cards);
     }
 
-    selectExpansions() {
-        this.modalService.open(ExpansionSelectionComponent);
+    changeSettings() {
+        this.modalService.open(RandomizerSettingsComponent, { size: 'md' });
     }
 }

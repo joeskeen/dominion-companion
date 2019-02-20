@@ -4,15 +4,18 @@ import { forkJoin } from 'rxjs';
 import { DominionDataService } from '../services/dominion-data.service';
 import { ActiveModal } from '@healthcatalyst/cashmere';
 import { SelectedExpansionsService } from '../services/selected-expansions.service';
+import { Type } from '../models/type';
 
 @Component({
     selector: 'app-expansion-selection',
-    templateUrl: 'expansion-selection.component.html'
+    templateUrl: 'randomizer-settings.component.html',
+    styleUrls: ['randomizer-settings.component.scss']
 })
-
-export class ExpansionSelectionComponent implements OnInit {
+export class RandomizerSettingsComponent implements OnInit {
     expansions: ExpansionMap;
     expansionList: Array<Expansion & { key: string; selected?: boolean; }>;
+    cardTypes: Array<Type & { key: string; selected?: boolean; }>;
+
     get selectedExpansions() {
         return this.expansionList
             .filter(e => e.selected)
@@ -26,9 +29,10 @@ export class ExpansionSelectionComponent implements OnInit {
     ngOnInit() {
         forkJoin(
             this.dominionDataService.getExpansions(),
+            this.dominionDataService.getCardTypes(),
             this.selectedExpansionsService.getSelectedExpansions()
         )
-        .subscribe(([expansions, selectedExpansions]) => {
+        .subscribe(([expansions, cardTypes, selectedExpansions]) => {
             selectedExpansions = selectedExpansions || Object.keys(expansions);
             this.expansionList = Object.keys(expansions)
                 .filter(k => !expansions[k].no_randomizer)
@@ -37,6 +41,11 @@ export class ExpansionSelectionComponent implements OnInit {
                     { selected: selectedExpansions.includes(k) },
                     expansions[k]));
             this.expansions = expansions;
+            this.cardTypes = cardTypes
+                .map(t => Object.assign(
+                    { key: t.card_type.join(' '), selected: null },
+                    t
+                ));
         });
     }
 
