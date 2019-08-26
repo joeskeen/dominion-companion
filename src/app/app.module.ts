@@ -1,4 +1,3 @@
-
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -18,8 +17,9 @@ import {
   TabsModule,
   AccordionModule,
   RadioButtonModule,
-  LabelModule,
-  InputModule
+  InputModule,
+  APP_SWITCHER_CONFIG,
+  APP_SWITCHER_SERVICE
 } from '@healthcatalyst/cashmere';
 import { LocaleService } from './services/locale.service';
 import { DominionDataService } from './services/dominion-data.service';
@@ -70,11 +70,9 @@ import { DominionAppSwitcherService } from './services/app-switcher.service';
     RandomizerService,
     LocalStorage,
     PreferencesService,
-    SelectedExpansionsService,
-    { provide: 'IAppSwitcherService', useClass: DominionAppSwitcherService },
-    { provide: 'IAppSwitcherConfig', useValue: { discoveryServiceUri: 'assets/data/apps' } }
+    SelectedExpansionsService
   ],
   entryComponents: [RandomizerSettingsComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

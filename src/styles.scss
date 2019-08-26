@@ -1,4 +1,4 @@
-@import "~@healthcatalyst/cashmere/scss/cashmere";
+@import '~@healthcatalyst/cashmere/scss/cashmere';
 
 $fa-font-path: '../node_modules/font-awesome/fonts';
 @import '../node_modules/font-awesome/scss/font-awesome';
@@ -11,27 +11,6 @@ body {
   padding: 0;
 }
 
-/**
- * CASHMERE OVERRIDES
- */
- hc-app-switcher hc-popover-content {
-  // make the app switcher icon size consistent
-  // .popover-icon.img-responsive {
-  //   width: 125px !important;
-  //   height: 125px !important;
-  // }
-
-  // Replace the title of the popop (not "Applications")
-  h4 {
-    color: white;
-    &:before {
-      color: black;
-      content: 'Notable Dominion Websites';
-    }
-  }
-
-  // suppress the "All my applications" link from Cashmere
-  .all-apps-link {
-    display: none !important;
-  }
+.hc-navbar .navbar-app a img {
+  height: unset !important;
 }

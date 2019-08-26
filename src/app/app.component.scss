@@ -1,8 +1,13 @@
-@import "~@healthcatalyst/cashmere/scss/colors";
+@import '~@healthcatalyst/cashmere/scss/colors';
 
 .content {
   background-color: $slate-gray-100;
 
   margin-top: 53px;
   padding: 10px;
+}
+
+.hc-navbar-github-button {
+  padding: 9px 15px;
+  color: white;
 }
