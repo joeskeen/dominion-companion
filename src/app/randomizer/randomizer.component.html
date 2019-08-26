@@ -1,22 +1,29 @@
 <div class="header">
-    <div class="left">
-        <h3>Cards</h3>
-        <span class="includingExpansions">Including {{selectedExpansions.length}} expansion(s)</span>
-    </div>
-    <div class="right">
-        <button hc-icon-button (click)="randomize()" title="Re-randomize all cards">
-            <hc-icon fontSet="fa" fontIcon="fa-refresh"></hc-icon>
-        </button>
-        <button hc-icon-button (click)="changeSettings()" title="Change settings">
-            <hc-icon fontSet="fa" fontIcon="fa-cog"></hc-icon>
-        </button>
-    </div>
+  <div class="left">
+    <h3>Cards</h3>
+    <span class="includingExpansions"
+      >Including {{ selectedExpansions.length }} expansion(s)</span
+    >
+  </div>
+  <div class="right">
+    <button hc-icon-button (click)="randomize()" title="Re-randomize all cards">
+      <hc-icon fontSet="fa" fontIcon="fa-refresh"></hc-icon>
+    </button>
+    <button hc-icon-button (click)="changeSettings()" title="Change settings">
+      <hc-icon fontSet="fa" fontIcon="fa-cog"></hc-icon>
+    </button>
+  </div>
 </div>
 <div class="cards">
-<hc-tile class="card" *ngFor="let card of cards">
-    <app-card-summary [card]="card" [expansion]="getExpansion(card)" [type]="getType(card)">
+  <hc-tile class="card" *ngFor="let card of cards">
+    <app-card-summary
+      [card]="card"
+      [expansion]="getExpansion(card)"
+      [type]="getType(card)"
+      [title]="card.extra"
+    >
     </app-card-summary>
-    <br/>
+    <br />
     <span [innerHTML]="card.description | description"></span>
-</hc-tile>
+  </hc-tile>
 </div>

@@ -17,9 +17,7 @@ import {
   TabsModule,
   AccordionModule,
   RadioButtonModule,
-  InputModule,
-  APP_SWITCHER_CONFIG,
-  APP_SWITCHER_SERVICE
+  InputModule
 } from '@healthcatalyst/cashmere';
 import { LocaleService } from './services/locale.service';
 import { DominionDataService } from './services/dominion-data.service';
@@ -32,7 +30,6 @@ import { ModalModule } from '@healthcatalyst/cashmere';
 import { RandomizerSettingsComponent } from './randomizer-settings/randomizer-settings.component';
 import { RandomizerSettingsService } from './randomizer-settings/randomizer-settings.service';
 import { DescriptionPipe } from './pipes/description.pipe';
-import { DominionAppSwitcherService } from './services/app-switcher.service';
 
 @NgModule({
   declarations: [

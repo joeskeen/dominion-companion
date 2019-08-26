@@ -31,22 +31,44 @@
       </hc-tab>
       <hc-tab tabTitle="Advanced">
         <div class="tab-content">
-          <div *ngFor="let type of cardTypes" class="option">
-            <label>{{ type.key }}</label>
-            <hc-radio-group
-              class="choices"
-              [(ngModel)]="type.selected"
-              inline="true"
-            >
-              <hc-radio-button class="always" [value]="true"
-                >Always</hc-radio-button
+          <hc-accordion>
+            <hc-accordion-toolbar>Features</hc-accordion-toolbar>
+            <div *ngFor="let feature of features" class="option">
+              <label>{{ feature.key }}</label>
+              <hc-radio-group
+                class="choices"
+                [(ngModel)]="feature.selected"
+                inline="true"
               >
-              <hc-radio-button class="never" [value]="false"
-                >Never</hc-radio-button
+                <hc-radio-button class="always" [value]="true"
+                  >Always</hc-radio-button
+                >
+                <hc-radio-button class="never" [value]="false"
+                  >Never</hc-radio-button
+                >
+                <hc-radio-button [value]="null">Random</hc-radio-button>
+              </hc-radio-group>
+            </div>
+          </hc-accordion>
+          <hc-accordion>
+            <hc-accordion-toolbar>Card Types</hc-accordion-toolbar>
+            <div *ngFor="let type of cardTypes" class="option">
+              <label>{{ type.key }}</label>
+              <hc-radio-group
+                class="choices"
+                [(ngModel)]="type.selected"
+                inline="true"
               >
-              <hc-radio-button [value]="null">Random</hc-radio-button>
-            </hc-radio-group>
-          </div>
+                <hc-radio-button class="always" [value]="true"
+                  >Always</hc-radio-button
+                >
+                <hc-radio-button class="never" [value]="false"
+                  >Never</hc-radio-button
+                >
+                <hc-radio-button [value]="null">Random</hc-radio-button>
+              </hc-radio-group>
+            </div>
+          </hc-accordion>
         </div>
       </hc-tab>
     </hc-tab-set>

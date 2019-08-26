@@ -16,6 +16,20 @@ export class RandomizerSettingsComponent implements OnInit {
   expansions: ExpansionMap;
   expansionList: Array<Expansion & { key: string; selected?: boolean }>;
   cardTypes: Array<Type & { key: string; selected?: boolean }>;
+  features: Array<{ key: string; pattern: RegExp; selected?: boolean }>;
+  featureDefinitions = [
+    { key: '+ Action', pattern: /\+\d+ Action/ },
+    { key: '+ Buy', pattern: /\+\d+ Buy/ },
+    { key: '+ Card', pattern: /\+\d+ Card/ },
+    { key: '+ Coffer', pattern: /\+\d+ Coffer/ },
+    { key: '+ Coin', pattern: /\+\d+ Coin/ },
+    { key: 'Affect other players', pattern: /player/ },
+    { key: 'Gain', pattern: /gain/ },
+    { key: 'Trash', pattern: /trash/ },
+    { key: 'Token', pattern: /token/ },
+    { key: 'Villager', pattern: /\+\d+ Villager/ },
+    { key: 'VP Token', pattern: /<VP> token/ }
+  ];
 
   get selectedExpansions() {
     return this.expansionList.filter(e => e.selected).map(e => e.key);
@@ -51,6 +65,13 @@ export class RandomizerSettingsComponent implements OnInit {
       }
       return Object.assign({ key: type, selected }, t);
     });
+    this.features = this.featureDefinitions.map(f => {
+      let enabled: boolean = (settings.features[f.key] || ({} as any)).enabled;
+      if (enabled === undefined) {
+        enabled = null;
+      }
+      return Object.assign({ selected: enabled }, f);
+    });
   }
 
   selectAllExpansions() {
@@ -70,7 +91,12 @@ export class RandomizerSettingsComponent implements OnInit {
         }
         return prev;
       }, {}),
-      features: {}
+      features: this.features.reduce((prev, curr) => {
+        if (curr.selected === true || curr.selected === false) {
+          prev[curr.key] = { pattern: curr.pattern, enabled: curr.selected };
+        }
+        return prev;
+      }, {})
     };
     await this.selectedExpansionsService.setRandomizerSettings(settings);
     this.activeModal.close(settings);
