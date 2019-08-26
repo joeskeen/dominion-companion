@@ -30,7 +30,7 @@ import { CardSummaryComponent } from './card-summary/card-summary.component';
 import { PreferencesService } from './services/preferences.service';
 import { ModalModule } from '@healthcatalyst/cashmere';
 import { RandomizerSettingsComponent } from './randomizer-settings/randomizer-settings.component';
-import { SelectedExpansionsService } from './services/selected-expansions.service';
+import { RandomizerSettingsService } from './randomizer-settings/randomizer-settings.service';
 import { DescriptionPipe } from './pipes/description.pipe';
 import { DominionAppSwitcherService } from './services/app-switcher.service';
 
@@ -70,7 +70,7 @@ import { DominionAppSwitcherService } from './services/app-switcher.service';
     RandomizerService,
     LocalStorage,
     PreferencesService,
-    SelectedExpansionsService
+    RandomizerSettingsService
   ],
   entryComponents: [RandomizerSettingsComponent],
   bootstrap: [AppComponent]

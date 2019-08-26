@@ -1,23 +1,23 @@
 export interface Card {
-    card_tag: string;
-    cardset_tags: string[];
-    cost: string;
-    group_tag: string;
-    randomizer?: boolean;
-    types: string[];
-    count?: string;
-    potcost?: string;
+  card_tag: string;
+  cardset_tags: string[];
+  cost: string;
+  group_tag: string;
+  randomizer?: boolean;
+  types: string[];
+  count?: string;
+  potcost?: string;
 }
 
-export type CompleteCard = Card & CardText;
+export type CompleteCard = Card & CardText & { randomizer?: boolean };
 
 export interface LocaleCardTextMap {
-    [cardKey: string]: CardText;
+  [cardKey: string]: CardText;
 }
 
 export interface CardText {
-    description: string;
-    extra: string;
-    name: string;
-    untranslated?: string;
+  description: string;
+  extra: string;
+  name: string;
+  untranslated?: string;
 }

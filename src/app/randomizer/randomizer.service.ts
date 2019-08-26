@@ -1,44 +1,133 @@
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 import { DominionDataService } from '../services/dominion-data.service';
 import { CompleteCard } from '../models/card';
 import { CompleteExpansion } from '../models/expansion';
+import { RandomizerSettings } from '../randomizer-settings/randomizer-settings';
 
 @Injectable()
 export class RandomizerService {
-  private readonly defaultAmount = 10;
+  private readonly defaultCount = 10;
 
   constructor(private dominionDataService: DominionDataService) {}
 
-  getRandomCards(
-    expansionKeys: string[],
-    amount = this.defaultAmount
-  ): Observable<CompleteCard[]> {
-    const targetExpansions$ = expansionKeys.map(k =>
+  async getRandomCards(
+    settings: RandomizerSettings,
+    count = this.defaultCount
+  ): Promise<CompleteCard[]> {
+    const types = settings.cardTypes || {};
+    const features = settings.features || {};
+    Object.keys(features).forEach(
+      k => (features[k].pattern = new RegExp(features[k].pattern.source, 'gis'))
+    );
+
+    const targetExpansions$ = settings.includedExpansionKeys.map(k =>
       this.dominionDataService.getCompleteExpansion(k)
     );
-    return forkJoin(...targetExpansions$).pipe(
-      map((expansions: CompleteExpansion[]) => {
-        const allCards = ([].concat.apply(
-          [],
-          expansions.map(e => e.cards)
-        ) as CompleteCard[]).filter(c => c.randomizer !== false);
-        const uniqueCards = allCards
-          .map(c => allCards.filter(c1 => c1.card_tag === c.card_tag)[0])
-          .filter((c, i) => allCards.indexOf(c) === i);
-        const shuffled = shuffle(uniqueCards.slice());
-        return shuffled
-          .slice(0, amount)
-          .sort((a, b) => a.name.localeCompare(b.name));
-      })
+    const expansions: CompleteExpansion[] = await forkJoin(
+      targetExpansions$
+    ).toPromise();
+
+    const cards = this.getAllCards(expansions);
+    const eligibleCards = this.exceptForbidden(cards, types, features);
+    const shuffled = shuffle(eligibleCards);
+
+    // if this is being used to replace a single card, ignore required constraint
+    if (count !== this.defaultCount) {
+      return this.sortAlphabetically(shuffled.slice(0, count));
+    }
+
+    const randomCards = [];
+    const requiredCardTypes = Object.keys(types).filter(k => types[k] === true);
+    requiredCardTypes.forEach(t => {
+      if (randomCards.find(c => this.isType(c, t))) {
+        return;
+      }
+      if (randomCards.length === count) {
+        throw new Error(
+          `Can't fulfil all requested requirements within ${count} cards`
+        );
+      }
+      const match = shuffled.find(c => this.isType(c, t));
+      if (!match) {
+        throw new Error(`Can't find a card matching the type ${t}`);
+      }
+      randomCards.push(match);
+    });
+    const requiredFeatures = Object.keys(features)
+      .filter(k => features[k].enabled === true)
+      .map(k => features[k]);
+    requiredFeatures.forEach(f => {
+      if (randomCards.find(c => this.hasFeature(c, f.pattern))) {
+        return;
+      }
+      if (randomCards.length === count) {
+        throw new Error(
+          `Can't fulfil all requested requirements within ${count} cards`
+        );
+      }
+      const match = shuffled.find(c => this.hasFeature(c, f.pattern));
+      if (!match) {
+        throw new Error(`Can't find a card matching the feature ${f.pattern}`);
+      }
+
+      randomCards.push(match);
+    });
+
+    while (randomCards.length < count) {
+      randomCards.push(shuffled.find(c => !randomCards.includes(c)));
+    }
+
+    return this.sortAlphabetically(randomCards);
+  }
+
+  private sortAlphabetically(cards: CompleteCard[]) {
+    return cards.slice().sort((c1, c2) => c1.name.localeCompare(c2.name));
+  }
+
+  private getAllCards(expansions: CompleteExpansion[]) {
+    const allCards = expansions
+      .map(e => e.cards)
+      .reduce((prev, curr) => prev.concat(curr), [])
+      .filter(c => c.randomizer !== false);
+    return allCards
+      .map(c => allCards.filter(c1 => c1.card_tag === c.card_tag)[0])
+      .filter((c, i) => allCards.indexOf(c) === i);
+  }
+
+  private exceptForbidden(
+    cards: CompleteCard[],
+    types: { [type: string]: boolean },
+    features: { [feature: string]: { enabled: boolean; pattern: RegExp } }
+  ): CompleteCard[] {
+    const forbiddenCardTypes = Object.keys(types).filter(
+      k => types[k] === false
     );
+    cards = cards.filter(c => !forbiddenCardTypes.find(t => this.isType(c, t)));
+    const forbiddenFeatures = Object.keys(features)
+      .filter(k => features[k].enabled === false)
+      .map(k => features[k]);
+
+    cards = cards.filter(
+      c => !forbiddenFeatures.find(f => this.hasFeature(c, f.pattern))
+    );
+    return cards;
+  }
+
+  private isType(card: CompleteCard, type: string) {
+    const types = type.split(' ');
+    return types.filter(t => card.types.includes(t)).length === types.length;
+  }
+
+  private hasFeature(card: CompleteCard, pattern: RegExp) {
+    return pattern.test(`${card.name} ${card.description} ${card.extra}`);
   }
 }
 
 // the Fisher-Yates (aka Knuth) Shuffle
 // see https://stackoverflow.com/a/2450976/1396477
 function shuffle<T>(array: T[]): T[] {
+  array = array.slice();
   let currentIndex = array.length;
 
   // While there remain elements to shuffle...

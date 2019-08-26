@@ -24,7 +24,7 @@
     "@angular/platform-browser-dynamic": "^8.2.3",
     "@angular/router": "^8.2.3",
     "@healthcatalyst/cashmere": "^5.3.2",
-    "@ngx-pwa/local-storage": "^6.0.0",
+    "@ngx-pwa/local-storage": "^6.2.5",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
     "npm-font-open-sans": "^1.1.0",
