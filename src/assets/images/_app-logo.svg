@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:svg="http://www.w3.org/2000/svg" 
+    xmlns="http://www.w3.org/2000/svg" version="1.0" width="900" height="1050" id="svg2">
+    <path transform="translate(75,0)" d="
+                M 14.67253,505.91579
+                C 14.67253,697.79161 225.48468,933.61588 371.35218,1010.2231
+                C 506.33609,939.33177 724.90419,706.00207 728.03188,505.91579
+                C 731.15952,305.82951 728.03192,253.57269 728.03192,42.13911
+                C 538.11565,42.13911 276.05652,42.13911 16.04576,42.13911
+                C 16.04576,523.49641 14.67253,314.03999 14.67253,505.91579
+                z " style="
+                fill:#006d9a;
+                fill-opacity:1;
+                fill-rule:evenodd;
+                stroke:black;
+                stroke-width:5.80600023;
+                stroke-linecap:butt;
+                stroke-linejoin:miter;
+                stroke-miterlimit:4;
+                stroke-dasharray:none;
+                stroke-opacity:1" id="path2778"></path>
+    <!-- <text fill="white" x="250" y="250" width="250" height="250" style="font-size: 250px;" transform="rotate(45 375 375)">♣</text> -->
+</svg>
