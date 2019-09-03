@@ -38,6 +38,7 @@ export class RandomizerService {
     }
 
     const randomCards = [];
+    const sidewaysCards = [];
     const requiredCardTypes = Object.keys(types).filter(k => types[k] === true);
     requiredCardTypes.forEach(t => {
       if (randomCards.find(c => this.isType(c, t))) {
@@ -74,22 +75,47 @@ export class RandomizerService {
       randomCards.push(match);
     });
 
-    while (randomCards.length < count) {
-      randomCards.push(shuffled.find(c => !randomCards.includes(c)));
+    if (settings.sidewaysCards === true) {
+      sidewaysCards.push(shuffled.find(c => this.isSideways(c)));
     }
 
-    return this.sortAlphabetically(randomCards);
+    while (randomCards.length < count) {
+      const nextCard = shuffled.find(
+        c =>
+          // it's not an already selected kingdom card
+          (!this.isSideways(c) && !randomCards.includes(c)) ||
+          // or it's a sideways card that hasn't been selected and we have room for one more
+          (this.isSideways(c) &&
+            sidewaysCards.length < 2 &&
+            !sidewaysCards.includes(c))
+      );
+
+      if (nextCard === null) {
+        throw new Error('Ran out of cards :(');
+      }
+
+      if (this.isSideways(nextCard)) {
+        sidewaysCards.push(nextCard);
+      } else {
+        randomCards.push(nextCard);
+      }
+    }
+
+    return this.sortAlphabetically(randomCards.concat(sidewaysCards));
   }
 
   private sortAlphabetically(cards: CompleteCard[]) {
     return cards.slice().sort((c1, c2) => c1.name.localeCompare(c2.name));
   }
 
-  private getAllCards(expansions: CompleteExpansion[]) {
+  private getAllCards(expansions: CompleteExpansion[], sideways?: boolean) {
     const allCards = expansions
       .map(e => e.cards)
       .reduce((prev, curr) => prev.concat(curr), [])
-      .filter(c => c.randomizer !== false);
+      .filter(
+        c =>
+          c.randomizer !== false || (sideways !== false && this.isSideways(c))
+      );
     return allCards
       .map(c => allCards.filter(c1 => c1.card_tag === c.card_tag)[0])
       .filter((c, i) => allCards.indexOf(c) === i);
@@ -112,6 +138,11 @@ export class RandomizerService {
       c => !forbiddenFeatures.find(f => this.hasFeature(c, f.pattern))
     );
     return cards;
+  }
+
+  private isSideways(card: CompleteCard) {
+    return ['Event', 'Project', 'Landmark'].filter(t => card.types.includes(t))
+      .length;
   }
 
   private isType(card: CompleteCard, type: string) {
