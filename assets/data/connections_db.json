@@ -1,0 +1,222 @@
+{
+    "types": {
+        "Doom": {
+            "types": [ "Hex" ]
+        },
+        "Hex": {
+            "types": [ "Curse" ],
+            "cards": [
+                "Miserable - Twice Miserable",
+                "Envious - Deluded"
+            ],
+            "mats": [ "Trash" ]
+        },
+        "Fate": {
+            "types": [ "Boon" ]
+        },
+        "Boon": {
+            "cards": [ "Will-O'-Wisp" ],
+            "mats": [ "Trash" ]
+        },
+        "Reserve": {
+            "mats": [ "Tavern" ]
+        }
+    },
+    "sets": {
+
+    },
+    "cards": {
+        "Miser": {
+            "mats": [ "Tavern" ]
+        },
+        "Bridge Troll": {
+            "tokens": [ "-1 Coin" ]
+        },
+        "Giant": {
+            "types": [ "Curse" ],
+            "tokens": [ "Journey" ]
+        },
+        "Page": {
+            "cards": [ "Treasure Hunter" ]
+        },
+        "Treasure Hunter": {
+            "cards": [ "Warrior" ]
+        },
+        "Warrior": {
+            "cards": [ "Hero" ]
+        },
+        "Hero": {
+            "cards": [ "Champion" ]
+        },
+        "Peasant": {
+            "cards": [ "Soldier" ]
+        },
+        "Soldier": {
+            "cards": [ "Fugitive" ]
+        },
+        "Fugitive": {
+            "cards": [ "Disciple" ]
+        },
+        "Disciple": {
+            "cards": [ "Teacher" ]
+        },
+        "Teacher": {
+            "tokens": [
+                "+1 Card",
+                "+1 Action",
+                "+1 Buy",
+                "+1 Coin"
+            ]
+        },
+        "Ranger": {
+            "tokens": [ "Journey" ]
+        },
+        "Relic": {
+            "tokens": [ "-1 Card" ]
+        },
+        "Plan": {
+            "tokens": [ "Trashing" ]
+        },
+        "Ferry": {
+            "tokens": [ "-2 Cost" ]
+        },
+        "Pathfinding": {
+            "tokens": [ "+1 Card" ]
+        },
+        "Lost Arts": {
+            "tokens": [ "+1 Action" ]
+        },
+        "Seaway": {
+            "tokens": [ "+1 Buy" ]
+        },
+        "Inheritance": {
+            "tokens": [ "Estate" ]
+        },
+        "Raid": {
+            "tokens": [ "-1 Card" ]
+        },
+        "Ball": {
+            "tokens": [ "-1 Coin" ]
+        },
+        "Pilgrimage": {
+            "tokens": [ "Journey" ]
+        },
+        "Bonfire": {
+            "mats": [ "Trash" ]
+        },
+        "Training": {
+            "tokens": [ "+1 Coin" ]
+        },
+        "Borrow": {
+            "tokens": [ "-1 Card" ]
+        },
+        "Exorcist": {
+            "cards": [
+                "Will-O'-Wisp",
+                "Imp",
+                "Ghost"
+            ],
+            "mats": [ "Trash" ]
+        },
+        "Tormentor": {
+            "cards": [ "Imp" ]
+        },
+        "Devil's Workshop": {
+            "cards": [ "Imp" ]
+        },
+        "Goat": {
+            "mats": [ "Trash" ]
+        },
+        "Haunted Mirror": {
+            "cards": "Ghost"
+        },
+        "Magic Lamp": {
+            "mats": [ "Trash" ]
+        },
+        "Monastery": {
+            "mats": [ "Trash" ]
+        },
+        "Necromancer": {
+            "types": [ "Zombie" ],
+            "mats": [ "Trash" ]
+        },
+        "Pixie": {
+            "mats": [ "Trash" ]
+        },
+        "Pooka": {
+            "cards": [ "Cursed Gold" ],
+            "mats": [ "Trash" ]
+        },
+        "Cursed Gold": {
+            "types": [ "Curse" ]
+        },
+        "Tragic Hero": {
+            "mats": [ "Trash" ]
+        },
+        "War": {
+            "mats": [ "Trash" ]
+        },
+        "Zombie Apprentice": {
+            "mats": [ "Trash" ]
+        },
+        "Zombie Mason": {
+            "mats": [ "Trash" ]
+        },
+        "Dismantle": {
+            "mats": [ "Trash" ]
+        },
+        "Governor": {
+            "mats": [ "Trash" ]
+        },
+        "Sauna": {
+            "cards": [ "Avanto" ],
+            "mats": [ "Trash" ]
+        },
+        "Bishop": {
+            "tokens": [ "+1 VP" ],
+            "mats": [ "Trash" ]
+        },
+        "Expand": {
+            "mats": [ "Trash" ]
+        },
+        "Forge": {
+            "mats": [ "Trash" ]
+        },
+        "Loan": {
+            "mats": [ "Trash" ]
+        },
+        "Mint": {
+            "mats": [ "Trash" ]
+        },
+        "Mountebank": {
+            "types": [ "Curse" ]
+        },
+        "Trade Route": {
+            "mats": [ "Trash", "Trade Route" ],
+            "tokens": [ "Coin" ]
+        },
+        "Watchtower": {
+            "mats": [ "Trash" ]
+        },
+        "Embargo": {
+            "mats": [ "Trash" ],
+            "tokens": [ "Embargo" ]
+        },
+        "Lookout": {
+            "mats": [ "Trash" ]
+        },
+        "Pirate Ship": {
+            "mats": [ "Trash" ],
+            "tokens": [ "Coin" ]
+        },
+        "Salvager": {
+            "mats": [ "Trash" ]
+        },
+        "Sea Hag": {
+            "types": [ "Curse" ]
+        },
+        "Treasure Map": {
+            "mats": [ "Trash" ]
+        }
+    }
+}

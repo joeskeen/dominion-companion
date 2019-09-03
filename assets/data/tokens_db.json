@@ -1,0 +1,68 @@
+[{
+    "token_tag": "-1 Coin",
+    "cardset_tags": [
+        "adventures"
+    ]
+},{
+    "token_tag": "Journey",
+    "cardset_tags": [
+        "adventures"
+    ]
+},{
+    "token_tag": "+1 Card",
+    "cardset_tags": [
+        "adventures"
+    ]
+},{
+    "token_tag": "+1 Action",
+    "cardset_tags": [
+        "adventures"
+    ]
+},{
+    "token_tag": "+1 Buy",
+    "cardset_tags": [
+        "adventures"
+    ]
+},{
+    "token_tag": "+1 Coin",
+    "cardset_tags": [
+        "adventures"
+    ]
+},{
+    "token_tag": "-1 Card",
+    "cardset_tags": [
+        "adventures"
+    ]
+},{
+    "token_tag": "Trashing",
+    "cardset_tags": [
+        "adventures"
+    ]
+},{
+    "token_tag": "-2 Cost",
+    "cardset_tags": [
+        "adventures"
+    ]
+},{
+    "token_tag": "Estate",
+    "cardset_tags": [
+        "adventures"
+    ]
+},{
+    "token_tag": "+1 VP",
+    "cardset_tags": [
+        "prosperity"
+    ]
+},{
+    "token_tag": "Coin",
+    "cardset_tags": [
+        "prosperity",
+        "seaside",
+        "guilds"
+    ]
+},{
+    "token_tag": "Embargo",
+    "cardset_tags": [
+        "seaside"
+    ]
+}]
