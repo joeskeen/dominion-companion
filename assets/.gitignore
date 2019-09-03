@@ -1,0 +1,3 @@
+data/*
+images/*
+!images/_app-*.svg
