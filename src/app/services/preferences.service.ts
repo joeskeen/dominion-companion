@@ -5,21 +5,17 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class PreferencesService {
-    constructor(private localStorage: LocalStorage) {
-    }
+  constructor(private localStorage: LocalStorage) {}
 
-    getPreference<T>(key: string): Observable<T> {
-        return this.localStorage.getItem<T>(key);
-    }
+  getPreference<T>(key: string): Observable<T> {
+    return this.localStorage.getItem<T>(key) as Observable<T>;
+  }
 
-    setPreference<T>(key: string, value: T): Observable<T> {
-        return this.localStorage.setItem(key, value)
-            .pipe(
-                map(() => value)
-            );
-    }
+  setPreference<T>(key: string, value: T): Observable<T> {
+    return this.localStorage.setItem(key, value).pipe(map(() => value));
+  }
 
-    resetPreference(key: string): Observable<{}> {
-        return this.localStorage.removeItem(key);
-    }
+  resetPreference(key: string): Observable<{}> {
+    return this.localStorage.removeItem(key);
+  }
 }

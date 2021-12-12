@@ -17,15 +17,33 @@
               Clear Selection
             </button>
           </div>
-          <div *ngFor="let expansion of expansionList">
-            <hc-checkbox
-              [id]="expansion.key + '_checkbox'"
-              [name]="expansion.key + '_checkbox'"
-              [(ngModel)]="expansion.selected"
-            >
-              <img [src]="expansion.image" class="icon" />
-              {{ expansion.set_name }}
-            </hc-checkbox>
+          <div class="columns">
+            <div class="leftColumn">
+              <div *ngFor="let expansion of expansionList; let i = index">
+                <hc-checkbox
+                  *ngIf="i <= expansionList.length / 2"
+                  [id]="expansion.key + '_checkbox'"
+                  [name]="expansion.key + '_checkbox'"
+                  [(ngModel)]="expansion.selected"
+                >
+                  <img [src]="expansion.image" class="icon" />
+                  {{ expansion.set_name }}
+                </hc-checkbox>
+              </div>
+            </div>
+            <div class="rightColumn">
+              <div *ngFor="let expansion of expansionList; let i = index">
+                <hc-checkbox
+                  *ngIf="i > expansionList.length / 2"
+                  [id]="expansion.key + '_checkbox'"
+                  [name]="expansion.key + '_checkbox'"
+                  [(ngModel)]="expansion.selected"
+                >
+                  <img [src]="expansion.image" class="icon" />
+                  {{ expansion.set_name }}
+                </hc-checkbox>
+              </div>
+            </div>
           </div>
         </div>
       </hc-tab>

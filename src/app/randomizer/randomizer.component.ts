@@ -13,7 +13,7 @@ import { RandomizerSettings } from '../randomizer-settings/randomizer-settings';
 @Component({
   selector: 'app-randomizer',
   templateUrl: 'randomizer.component.html',
-  styleUrls: ['randomizer.component.scss']
+  styleUrls: ['randomizer.component.scss'],
 })
 export class RandomizerComponent implements OnInit {
   cards: Card[];
@@ -22,7 +22,7 @@ export class RandomizerComponent implements OnInit {
   expansionList: Array<Expansion & { key: string; selected?: boolean }> = [];
   settings: RandomizerSettings;
   get selectedExpansions() {
-    return this.expansionList.filter(e => e.selected).map(e => e.key);
+    return this.expansionList.filter((e) => e.selected).map((e) => e.key);
   }
 
   constructor(
@@ -33,7 +33,7 @@ export class RandomizerComponent implements OnInit {
   ) {}
 
   getExpansion(card: Card): Expansion {
-    const setTag = card.cardset_tags.filter(s =>
+    const setTag = card.cardset_tags.filter((s) =>
       this.selectedExpansions.includes(s)
     )[0];
     return this.expansions[setTag];
@@ -41,18 +41,18 @@ export class RandomizerComponent implements OnInit {
 
   getType(card: Card): Type {
     const types = card.types.join(', ');
-    return this.cardTypes.filter(ct => ct.card_type.join(', ') === types)[0];
+    return this.cardTypes.filter((ct) => ct.card_type.join(', ') === types)[0];
   }
 
   async ngOnInit() {
     const [expansions, cardTypes, settings] = await forkJoin([
       this.dominionDataService.getExpansions(),
       this.dominionDataService.getCardTypes(),
-      from(this.settingsService.getRandomizerSettings())
+      from(this.settingsService.getRandomizerSettings()),
     ]).toPromise();
     this.settings = settings;
     this.cardTypes = cardTypes;
-    this.expansionList = Object.keys(expansions).map(k =>
+    this.expansionList = Object.keys(expansions).map((k) =>
       Object.assign(
         { key: k },
         { selected: settings.includedExpansionKeys.includes(k) },
@@ -60,10 +60,10 @@ export class RandomizerComponent implements OnInit {
       )
     );
     this.expansions = expansions;
-    this.settingsService.randomizerSettingsChanged.subscribe(newSettings => {
+    this.settingsService.randomizerSettingsChanged.subscribe((newSettings) => {
       this.settings = newSettings;
       this.expansionList.forEach(
-        expansion =>
+        (expansion) =>
           (expansion.selected = newSettings.includedExpansionKeys.includes(
             expansion.key
           ))
@@ -78,6 +78,6 @@ export class RandomizerComponent implements OnInit {
   }
 
   changeSettings() {
-    this.modalService.open(RandomizerSettingsComponent, { size: 'md' });
+    this.modalService.open(RandomizerSettingsComponent, { size: 'lg' });
   }
 }
